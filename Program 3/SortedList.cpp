@@ -14,7 +14,8 @@ SortedList::SortedList()
 	MaxArraySize = 10;
 	length = 0;
 	curPos = 0;
-	SortedList* newList = new SortedList[MaxArraySize];
+	itemList = new ItemType[10];
+
 }
 
 //constructor that accepts MaxArraySize parameter
@@ -23,7 +24,7 @@ SortedList::SortedList(int userMaxArraySize)
 	MaxArraySize = userMaxArraySize;
 	length = 0;
 	curPos = 0;
-	SortedList* newList = new SortedList[MaxArraySize];
+	itemList = new ItemType[MaxArraySize];
 
 	//identification
 	cout << "Nick O'Bryan, CS221-02, Program 3\n";
@@ -55,24 +56,48 @@ SortedList::~SortedList()
 
 bool SortedList::PutItem(ItemType userItem)
 {
+	bool found = false;
+	int iterator = 0;
+
+	//checks if list is full before adding item
 	if (this->GetLength() == MaxArraySize)
 	{
 		cout << "Array is full.";
 		return false;
 	}
 
-	for (int index = 0; index > MaxArraySize; index++)
+	//this is true if item is not in list
+	if (BinarySearch(itemList, userItem, 0, MaxArraySize - 1) < 0)
 	{
-		if 
+		bool tempA = GetLength() < MaxArraySize;
+		bool tempB = itemList[iterator] < userItem;
+
+		while (GetLength() < MaxArraySize && itemList[iterator] < userItem)
+		{
+			iterator++;
+		}
+
+		iterator++;
+		int indexToAdd = iterator;
+
+		iterator = GetLength();
+
+		for (iterator; iterator >= indexToAdd; iterator--)
+		{
+			itemList[iterator + 1] = itemList[iterator];
+		}
+
+		itemList[indexToAdd] = userItem;
 	}
-	return true;
+
+	return false;
 }
 
 ItemType SortedList::GetItem(ItemType userItem, bool& found)
 {
 	if (MaxArraySize != 0 && length != 0)
 	{
-		if (binarySearch(this, userItem, 0, MaxArraySize - 1) < 0)
+		if (BinarySearch(itemList, userItem, 0, MaxArraySize - 1) < 0)
 		{
 			cout << "Item not found.\n";
 			found = false;
@@ -96,7 +121,8 @@ bool SortedList::DeleteItem(ItemType userItem)
 
 ItemType SortedList::ResetList()
 {
-	return ;
+	ItemType item1;
+	return item1;
 }
 
 void SortedList::MakeEmpty()
@@ -111,7 +137,8 @@ void SortedList::PrintList()
 
 ItemType SortedList::GetNext()
 {
-
+	ItemType item1;
+	return item1;
 }
 
 int SortedList::GetLength()
@@ -119,7 +146,7 @@ int SortedList::GetLength()
 	return 0;
 }
 
-int SortedList::binarySearch(SortedList* array, ItemType userItem, int low, int high)
+int SortedList::BinarySearch(ItemType* array, ItemType userItem, int low, int high)
 {
 	bool found;
 
@@ -131,19 +158,19 @@ int SortedList::binarySearch(SortedList* array, ItemType userItem, int low, int 
 	else
 	{
 		int middle = (low + high) / 2;
-		if (userItem == array[middle].GetItem(userItem, found))
+		if (userItem == array[middle])
 		{
 			return middle;
 		}
 
-		else if (userItem > array[middle].GetItem(userItem, found))
+		else if (userItem > array[middle])
 		{
-			return binarySearch(array, userItem, middle + 1, high);
+			return BinarySearch(array, userItem, middle + 1, high);
 		}
 
 		else
 		{
-			return binarySearch(array, userItem, low, middle - 1);
+			return BinarySearch(array, userItem, low, middle - 1);
 		}
 	}
 

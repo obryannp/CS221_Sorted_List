@@ -34,5 +34,5 @@ public:
 	void PrintList();
 	ItemType GetNext();
 	int GetLength();
-	int binarySearch(SortedList* array, ItemType userItem, int low, int high);
+	int BinarySearch(ItemType* array, ItemType userItem, int low, int high);
 };
