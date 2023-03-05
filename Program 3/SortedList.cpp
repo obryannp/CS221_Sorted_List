@@ -14,7 +14,7 @@ SortedList::SortedList()
 	MaxArraySize = 10;
 	length = 0;
 	curPos = 0;
-	itemList = NULL;
+	SortedList* newList = new SortedList[MaxArraySize];
 }
 
 //constructor that accepts MaxArraySize parameter
@@ -23,8 +23,8 @@ SortedList::SortedList(int userMaxArraySize)
 	MaxArraySize = userMaxArraySize;
 	length = 0;
 	curPos = 0;
-	itemList = NULL;
-	
+	SortedList* newList = new SortedList[MaxArraySize];
+
 	//identification
 	cout << "Nick O'Bryan, CS221-02, Program 3\n";
 }
@@ -36,7 +36,7 @@ SortedList::~SortedList()
 }
 
 //copy constructor
-void SortedList::operator = (SortedList& listToCopy)
+/*void SortedList::operator = (SortedList& listToCopy)
 {
 
 	int copyLength = listToCopy.GetLength();
@@ -51,44 +51,100 @@ void SortedList::operator = (SortedList& listToCopy)
 	MaxArraySize = listToCopy.MaxArraySize;
 	length = listToCopy.GetLength();
 
-}
+}*/
 
 bool SortedList::PutItem(ItemType userItem)
 {
+	if (this->GetLength() == MaxArraySize)
+	{
+		cout << "Array is full.";
+		return false;
+	}
+
+	for (int index = 0; index > MaxArraySize; index++)
+	{
+		if 
+	}
 	return true;
 }
 
-ItemType GetItem(ItemType userItem, bool& found)
+ItemType SortedList::GetItem(ItemType userItem, bool& found)
 {
+	if (MaxArraySize != 0 && length != 0)
+	{
+		if (binarySearch(this, userItem, 0, MaxArraySize - 1) < 0)
+		{
+			cout << "Item not found.\n";
+			found = false;
+			return userItem;
+		}
+
+		cout << "Item was found.\n";
+		found = true;
+		return userItem;
+	}
+
+	cout << "Item not found.\n";
+	found = false;
 	return userItem;
 }
 
-bool DeleteItem(ItemType userItem)
+bool SortedList::DeleteItem(ItemType userItem)
 {
 	return true;
 }
 
-ItemType ResetList()
+ItemType SortedList::ResetList()
 {
 	return ;
 }
 
-void MakeEmpty()
+void SortedList::MakeEmpty()
 {
 
 }
 
-void PrintList()
+void SortedList::PrintList()
 {
 
 }
 
-ItemType GetNext()
+ItemType SortedList::GetNext()
 {
 
 }
 
-int GetLength()
+int SortedList::GetLength()
 {
 	return 0;
+}
+
+int SortedList::binarySearch(SortedList* array, ItemType userItem, int low, int high)
+{
+	bool found;
+
+	if (low > high)
+	{
+		return -1;
+	}
+
+	else
+	{
+		int middle = (low + high) / 2;
+		if (userItem == array[middle].GetItem(userItem, found))
+		{
+			return middle;
+		}
+
+		else if (userItem > array[middle].GetItem(userItem, found))
+		{
+			return binarySearch(array, userItem, middle + 1, high);
+		}
+
+		else
+		{
+			return binarySearch(array, userItem, low, middle - 1);
+		}
+	}
+
 }

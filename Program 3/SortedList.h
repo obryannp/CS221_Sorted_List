@@ -24,7 +24,7 @@ public:
 	~SortedList();
 
 	//copy constructor
-	void operator = (SortedList& listToCopy);
+	//void operator = (SortedList& listToCopy);
 
 	bool PutItem(ItemType userItem);
 	ItemType GetItem(ItemType userItem, bool& found);
@@ -34,4 +34,5 @@ public:
 	void PrintList();
 	ItemType GetNext();
 	int GetLength();
+	int binarySearch(SortedList* array, ItemType userItem, int low, int high);
 };
