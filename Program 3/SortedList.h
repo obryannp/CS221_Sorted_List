@@ -24,7 +24,7 @@ public:
 	~SortedList();
 
 	//copy constructor
-	//void operator = (SortedList& listToCopy);
+	void operator = (const SortedList& listToCopy);
 
 	bool PutItem(ItemType userItem);
 	ItemType GetItem(ItemType userItem, bool& found);
