@@ -13,7 +13,7 @@ class SortedList
 private:
 
 	int MaxArraySize = 0;
-	ItemType* itemList;
+	ItemType* itemList = NULL;
 	int length = 0;
 	int curPos = 0;
 
@@ -24,7 +24,7 @@ public:
 	~SortedList();
 
 	//copy constructor
-	void operator = (const SortedList& listToCopy);
+	void operator = (SortedList& listToCopy);
 
 	bool PutItem(ItemType userItem);
 	ItemType GetItem(ItemType userItem, bool& found);
