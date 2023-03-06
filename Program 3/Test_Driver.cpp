@@ -36,6 +36,28 @@ int main()
 	//SortedList tests
 	SortedList list1;
 	SortedList list2(12);
+
+	//empty lists tests
+	cout << "\nEMPTY LISTS CHECKS: \n";
+
+	cout << "PrintList: \n";
+	list1.PrintList();
+
+	cout << "resetList: " << list1.ResetList().GetData() << "\n";
+
+	cout << "MakeEmpty: \n"; 
+	list1.MakeEmpty();
+
+	cout << "next: " << list1.GetNext().GetData() << "\n";
+
+	cout << "Length: " << list1.GetLength() << "\n";
+
+
+
+
+
+
+
 	ItemType item1(1, "1st");
 	ItemType item2(2, "2nd");
 	ItemType item3(3, "3rd");
@@ -51,7 +73,7 @@ int main()
 	ItemType item13(13, "13th");
 	
 	//adds items out of order into the right order
-	cout << "ORDER CHECK:\n";
+	cout << "\nORDER CHECK:\n";
 	list1.PutItem(item1);
 	list1.PutItem(item3);
 	list1.PutItem(item2);
@@ -90,9 +112,9 @@ int main()
 	list2.PutItem(item2);
 	list2.PutItem(item4);
 	list2.PutItem(item5);
-	list2.PutItem(item6);
-	list2.PutItem(item7);
 	list2.PutItem(item8);
+	list2.PutItem(item7);
+	list2.PutItem(item6);
 	list2.PutItem(item9);
 	list2.PutItem(item10);
 	list2.PutItem(item11);
@@ -101,19 +123,20 @@ int main()
 
 	list2.PrintList();
 
+	//length checks
+	cout << "\nLENGTH CHECKS\n";
+	cout << "list1: " << list1.GetLength() << "\n";
+	cout << "list2: " << list2.GetLength() << "\n";
 
 
-	//cout << "\nRESET LIST CHECKS\n" << list2.ResetList().GetData();
+	//next and resetlist
+	cout << "\nNEXT ITEM AND RESET LIST CHECKS\n" << list1.ResetList().GetData() << "\t";
+	cout << list1.GetNext().GetData() << "\t";
+	cout << list1.GetNext().GetData() << "\t";
+	cout << list1.GetNext().GetData() << "\t";
+	cout << list1.GetNext().GetData() << "\t";
+	cout << list1.ResetList().GetData() << "\t";
 
-	list1.MakeEmpty();
-	list1.PutItem(item1);
-	list1.PutItem(item3);
-	list1.PutItem(item2);
-	list1.PrintList();
-	cout << "\n";
-	list1.DeleteItem(item1);
-	list1.DeleteItem(item1);
-	list1.PrintList();
-	//list2.PrintList();
+
 
 }
