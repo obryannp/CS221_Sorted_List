@@ -33,6 +33,8 @@ int main()
 
 int main()
 {
+	ItemType item1(1, "1st");
+	bool truth;
 	//SortedList tests
 	SortedList list1;
 	SortedList list2(12);
@@ -52,13 +54,16 @@ int main()
 
 	cout << "Length: " << list1.GetLength() << "\n";
 
+	cout << "GetItem: " << list1.GetItem(item1, truth).GetData();
+
+	cout << "DeleteItem: " << list1.DeleteItem(item1);
 
 
 
 
 
 
-	ItemType item1(1, "1st");
+
 	ItemType item2(2, "2nd");
 	ItemType item3(3, "3rd");
 	ItemType item4(4, "4th");
@@ -136,6 +141,17 @@ int main()
 	cout << list1.GetNext().GetData() << "\t";
 	cout << list1.GetNext().GetData() << "\t";
 	cout << list1.ResetList().GetData() << "\t";
+
+	cout << list1.DeleteItem(item1);
+	cout << list1.DeleteItem(item5);
+	cout << list1.DeleteItem(item10);
+
+	list1.PrintList();
+	list1.MakeEmpty();
+	list1.PrintList();
+
+	cout << list1.GetLength();
+	
 
 
 

@@ -170,7 +170,7 @@ bool SortedList::DeleteItem(ItemType userItem)
 		if (indexToRemove >= 0)
 		{
 			//moves all items over and deletes item to be deleted
-			for (int index = indexToRemove; index < length; index++)
+			for (int index = indexToRemove; index < length - 1; index++)
 			{
 				itemList[index] = itemList[index + 1];
 			}
@@ -189,7 +189,7 @@ bool SortedList::DeleteItem(ItemType userItem)
 	else
 	{
 		cout << "\nSomething went wrong, please try again.\n";
-		return true;
+		return false;
 	}
 }
 

@@ -1,5 +1,5 @@
 //file name: ItemType.cpp
-//purpose: create a class that instantiates an integer object for use in USLList.cpp
+//purpose: create a class that instantiates an object for use in SortedList.cpp
 //
 //name: Nick O'Bryan
 //email: npo0003@uah.edu
