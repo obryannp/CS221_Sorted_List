@@ -34,7 +34,7 @@ SortedList::SortedList(int userMaxArraySize)
 SortedList::~SortedList()
 {
 	MakeEmpty();
-	//delete itemList;
+	delete[] itemList;
 }
 
 //copy constructor
@@ -139,7 +139,7 @@ ItemType SortedList::GetItem(ItemType userItem, bool& found)
 	ItemType defaultItem;
 
 	//checks if the list is initialized and there are items in the list
-	if (MaxArraySize != 0 && length != 0)
+	if (itemList != NULL && MaxArraySize != 0 && length != 0)
 	{
 		//runs if item is not found in binary search
 		if (BinarySearch(itemList, userItem, 0, length) < 0)
@@ -154,33 +154,43 @@ ItemType SortedList::GetItem(ItemType userItem, bool& found)
 		return userItem;
 	}
 
-	cout << "Item not found, array has no items.\n";
+	cout << "Item not found, something went wrong.\n";
 	found = false;
 	return defaultItem;
 }
 
+//function that deletes item from the list and maintains sorting
 bool SortedList::DeleteItem(ItemType userItem)
 {
-	cout << "\nDeleteItem():\n";
-	//this is true if item is in the list
-	int indexToRemove = BinarySearch(itemList, userItem, 0, length);
-	if (indexToRemove >= 0)
+	if (itemList != NULL)
 	{
-		//moves all items over and deletes item to be deleted
-		for (int index = indexToRemove; index < length; index++)
+		cout << "\nDeleteItem():\n";
+		//this is true if item is in the list
+		int indexToRemove = BinarySearch(itemList, userItem, 0, length);
+		if (indexToRemove >= 0)
 		{
-			itemList[index] = itemList[index + 1];
+			//moves all items over and deletes item to be deleted
+			for (int index = indexToRemove; index < length; index++)
+			{
+				itemList[index] = itemList[index + 1];
+			}
+
+			//decrements length and returns true
+			cout << "Deleted, Stock Number: " << userItem.GetData() << "\n";
+			length--;
+			return true;
 		}
 
-		//decrements length and returns true
-		cout << "Deleted, Stock Number: " << userItem.GetData() << "\n";
-		length--;
-		return true;
-	} 
+		//if item is not found/list empty
+		cout << "Item not found.\n";
+		return false;
+	}
 
-	//if item is not found/list empty
-	cout << "Item not found.\n";
-	return false;
+	else
+	{
+		cout << "\nSomething went wrong, please try again.\n";
+		return true;
+	}
 }
 
 //function that resets list
@@ -193,10 +203,11 @@ ItemType SortedList::ResetList()
 //function that makes the list empty and sets length to 0
 void SortedList::MakeEmpty()
 {
-	for (int index = 0; index < MaxArraySize; index++)
-	{
-		itemList[index].SetData(0, "");
-	}
+	//creates temp variable to store MaxArraySize
+	int tempMaxSize = MaxArraySize;
+
+	delete[] itemList;
+	itemList = new ItemType[tempMaxSize];
 
 	length = 0;
 	curPos = 0;
@@ -217,6 +228,7 @@ void SortedList::PrintList()
 	cout << "\n" << endl;
 }
 
+//function that gets next item in list and iterates curPos
 ItemType SortedList::GetNext()
 {
 	curPos++;
